@@ -1,7 +1,24 @@
-# Vue 3 + Vite
+# Vite Boolfolio
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Questa applicazione mostra una lista di card con informazioni recuperate da un backend in Laravel, effettuando chiamate API in Axios.
 
-## Recommended IDE Setup
+## Funzionalità
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Mostra una lista di card con informazioni (titolo, descrizione, immagine) recuperate da un backend Laravel
+- Effettua chiamate API in Axios per recuperare i dati dal backend
+- Permette di aggiornare la lista delle card quando vengono aggiunte nuove informazioni nel backend
+
+## Tecnologie
+
+- Frontend in VueJS
+- Backend API in Laravel
+- Chiamate API con Axios
+- Stile SCSS e Bootstrap
+
+## Installazione
+
+1. Clonare il repository
+2. Eseguire `npm install` per installare le dipendenze
+3. Configurare il file `.env` con l'URL dell'API backend
+4. Eseguire `npm run serve` per avviare il server di sviluppo
+5. Accedere tramite `http://localhost:8080`
