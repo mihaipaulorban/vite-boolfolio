@@ -3,16 +3,33 @@ import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
 const projects = ref([]);
+const currentPage = ref(1);
 
-onMounted(async () => {
+const fetchProjects = async (page) => {
   try {
-    const response = await axios.get('http://localhost:8000/api/projects');
-    projects.value = response.data;
-    console.log(projects.value);
+    const response = await axios.get(
+      `http://localhost:8000/api/projects?page=${page}`
+    );
+    projects.value = response.data.data; // Assicurati che corrisponda alla struttura della tua risposta
+    currentPage.value = response.data.current_page;
   } catch (error) {
     console.error(error);
   }
+};
+
+onMounted(() => {
+  fetchProjects(currentPage.value);
 });
+
+const goToNextPage = () => {
+  fetchProjects(currentPage.value + 1);
+};
+
+const goToPreviousPage = () => {
+  if (currentPage.value > 1) {
+    fetchProjects(currentPage.value - 1);
+  }
+};
 </script>
 
 <template>
@@ -27,6 +44,16 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+    <button
+      class="btn btn-primary mx-2"
+      @click="goToPreviousPage"
+      :disabled="currentPage === 1"
+    >
+      Pagina Precedente
+    </button>
+    <button class="btn btn-primary mx-2" @click="goToNextPage">
+      Pagina Successiva
+    </button>
   </div>
 </template>
 
