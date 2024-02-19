@@ -11,6 +11,7 @@ const route = useRoute();
 const router = useRouter();
 const pageParam = ref(parseInt(route.params.page) || 1);
 const searchQuery = ref('');
+const error = ref(null);
 
 // Funzione per calcolare l'ultima pagina disponibile
 const lastPage = computed(() => {
@@ -26,8 +27,11 @@ const fetchProjects = async () => {
     projects.value = response.data.data;
     totalProjects.value = response.data.total;
     currentPage.value = response.data.current_page;
+
+    error.value = null;
   } catch (error) {
     console.error(error);
+    error.value = 'Si è verificato un errore durante il recupero dei progetti.';
   }
   console.log;
 };
@@ -85,6 +89,11 @@ fetchProjects();
         <label for="searchQuery">Cerca per titolo...</label>
       </div>
       <button @click="fetchProjects" class="btn btn-primary">Cerca</button>
+    </div>
+
+    <!-- Sezione degli errori -->
+    <div v-if="error" class="alert alert-danger" role="alert">
+      {{ error }}
     </div>
 
     <!-- Visualizzazione dei progetti -->
